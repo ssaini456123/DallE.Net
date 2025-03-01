@@ -1,28 +1,29 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Craiyon.Net;
+using Newtonsoft.Json.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 
-namespace Craiyon.Net
+namespace DallE.Net
 {
-    public class CraiyonService
+    public class DallEService
     {
         private const int GALLERY_MAX = 9;  // The max amount of images in a "gallery"
 
         private int _timeSpan = 60 * 5; // 5 minutes
         private int _galleryIndex = 0;
-        private string _baseUrl = "https://backend.craiyon.com/generate";
+        private string _baseUrl = "https://bf.dallemini.ai/generate";
 
-        private class Craiyon
+        private class DallE
         {   /* internal */
             public string? prompt { get; set; }
         }
 
         /// <summary>
-        ///     Craiyon is an AI based Image Generation Service that uses DALL-E.
+        ///     DallE is an AI based Image Generation Service that uses DALL-E.
         /// </summary>
         /// <param name="galleryIndex">The index within the image gallery you would like to download.</param>
-        public CraiyonService([Optional] int galleryIndex) {
+        public DallEService([Optional] int galleryIndex) {
             _galleryIndex = galleryIndex;
         }
 
@@ -45,7 +46,7 @@ namespace Craiyon.Net
         }
 
         /// <summary>
-        ///     Writes the base64 image information returned by craiyon to an image
+        ///     Writes the base64 image information returned by DallE to an image
         ///     when provided a path.
         /// </summary>
         /// <param name="b64_Data"></param>
@@ -64,7 +65,7 @@ namespace Craiyon.Net
         /// <returns></returns>
         private async Task<JObject> Download(string prompt)
         {
-            Craiyon c = new Craiyon();
+            DallE c = new DallE();
             c.prompt = prompt;
 
             string jsonData = JsonSerializer.Serialize(c);
@@ -88,14 +89,14 @@ namespace Craiyon.Net
         ///     Download all the images relating to the given prompt within the image gallery.
         ///     returns true if successful.
         /// </summary>
-        /// <param name="prompt">The prompt you would like craiyon to generate on.</param>
+        /// <param name="prompt">The prompt you would like DallE to generate on.</param>
         /// <param name="path">The pat to save the image to.</param>
         /// <returns></returns>
         public async Task DownloadGalleryAsync(string prompt, string folderPath)
         {
             if(prompt == null)
             {
-                throw new CraiyonInvalidPrompt();
+                throw new DallEInvalidPrompt();
             }
 
             var gallery = await Download(prompt);
@@ -119,15 +120,15 @@ namespace Craiyon.Net
         ///     Download a specific image from the prompts image gallery provided an index.
         /// </summary>
         /// 
-        /// <param name="prompt">The prompt you would like craiyon to generate on.</param>
+        /// <param name="prompt">The prompt you would like DallE to generate on.</param>
         /// <param name="path">The pat to save the image to.</param>
-        /// <exception cref="CraiyonCountOutOfBounds"></exception>
-        /// <exception cref="CraiyonInvalidPrompt"></exception>
+        /// <exception cref="DallEOutOfBounds"></exception>
+        /// <exception cref="DallEOutOfBounds"></exception>
         public async Task DownloadImageSpecificAsync(string prompt, string path)
         {
             if (prompt == null)
             {
-                throw new CraiyonInvalidPrompt();
+                throw new DallEInvalidPrompt();
             }
 
             var gallery = await Download(prompt);

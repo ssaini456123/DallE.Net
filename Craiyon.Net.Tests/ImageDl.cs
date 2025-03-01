@@ -1,5 +1,5 @@
-﻿/*
-using Craiyon.Net;
+﻿
+using DallE.Net;
 
 namespace Craiyon.Net.Tests
 {
@@ -9,7 +9,7 @@ namespace Craiyon.Net.Tests
         {
             
             Console.WriteLine("Generating Image...");
-            var craiyonService = new CraiyonService(1); // Get the 2nd image within the image gallery.
+            var craiyonService = new DallEService(1); // Get the 2nd image within the image gallery.
 
             try
             {
@@ -20,4 +20,3 @@ namespace Craiyon.Net.Tests
         }
     }
 }
-*/

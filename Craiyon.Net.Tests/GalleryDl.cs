@@ -1,6 +1,6 @@
-﻿using Craiyon.Net;
+﻿using DallE.Net;
 
-namespace Craiyon.Net.Tests
+namespace DallE.Net.Tests
 {
     public class GalleryDl
     {
@@ -10,7 +10,7 @@ namespace Craiyon.Net.Tests
             Console.WriteLine("Give me a prompt to generate:");
             string prompt = Console.ReadLine();
 
-            var craiyonService = new CraiyonService(); // Gallery index isn't needed if you are downloading the entire gallery.
+            var craiyonService = new DallEService(); // Gallery index isn't needed if you are downloading the entire gallery.
 
             try
             {

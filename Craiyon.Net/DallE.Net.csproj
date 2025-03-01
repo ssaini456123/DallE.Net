@@ -5,18 +5,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Authors>Sutinder S. Saini</Authors>
-    <Description>A .NET Wrapper over the Craiyon AI Image generation service.</Description>
+    <Description>A .NET Wrapper over the Dall-E generation service.</Description>
     <Copyright>Sutinder S. Saini</Copyright>
-    <PackageProjectUrl>https://github.com/terrain123456/Craiyon.Net</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/ssaini456123/DallE.Net</PackageProjectUrl>
     <PackageIcon>icon.jpg</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/terrain123456/Craiyon.Net</RepositoryUrl>
+    <RepositoryUrl>https://github.com/ssaini456123/DallE.Net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackAsTool>False</PackAsTool>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <Title>DotNetCraiyon</Title>
-    <AssemblyName>DotNetCraiyon</AssemblyName>
+    <AssemblyName>DallE.Net</AssemblyName>
     <Version>3.0</Version>
   </PropertyGroup>
 
