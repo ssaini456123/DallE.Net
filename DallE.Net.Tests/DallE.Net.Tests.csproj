@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Craiyon.Net\DallE.Net.csproj" />
+    <ProjectReference Include="..\DallE.Net\DallE.Net.csproj" />
   </ItemGroup>
 
 </Project>
