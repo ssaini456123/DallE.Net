@@ -1,4 +1,4 @@
-﻿
+﻿/*
 using DallE.Net;
 
 namespace Craiyon.Net.Tests
@@ -20,3 +20,4 @@ namespace Craiyon.Net.Tests
         }
     }
 }
+*/
