@@ -31,6 +31,7 @@ namespace DallE.Net.Tests
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Image successfully saved to: {loc}!");
+                Console.ForegroundColor = ConsoleColor.White;
             }
             catch (Exception e)
             {
