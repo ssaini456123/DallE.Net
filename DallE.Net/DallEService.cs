@@ -8,9 +8,10 @@ namespace DallE.Net
 {
     public class DallEService
     {
-        private const int GALLERY_MAX = 9;  // The max amount of images in a "gallery"
+        private static readonly int GALLERY_MAX = 9;  // The max amount of images in a "gallery"
+        
+        private const long DefaultWaitDuration = 5 * 60;
 
-        private int _timeSpan = 60 * 5; // 5 minutes
         private int _galleryIndex = 0;
         private string _baseUrl = "https://bf.dallemini.ai/generate";
 
@@ -61,9 +62,9 @@ namespace DallE.Net
         /// <summary>
         ///     Download the image gallery with the provided prompt.
         /// </summary>
-        /// <param name="prompt"></param>
+        /// <param name="prompt">The prompt to feed DALL-E's backend</param>
         /// <returns></returns>
-        private async Task<JObject> Download(string prompt)
+        private async Task<JObject> Download(string prompt, long timeout)
         {
             DallE c = new DallE();
             c.prompt = prompt;
@@ -74,12 +75,11 @@ namespace DallE.Net
             HttpResponseMessage respAsync = null;
             using (var client = new HttpClient())
             {
-                client.Timeout = TimeSpan.FromSeconds(_timeSpan);
+                client.Timeout = TimeSpan.FromSeconds(timeout);
                 respAsync = await client.PostAsync(_baseUrl, requestHeaders);
             }
 
             var responseString = await respAsync.Content.ReadAsStringAsync();
-
             JObject gallery = JObject.Parse(responseString);
 
             return gallery;
@@ -91,15 +91,17 @@ namespace DallE.Net
         /// </summary>
         /// <param name="prompt">The prompt you would like DallE to generate on.</param>
         /// <param name="path">The pat to save the image to.</param>
+        /// <param name="folderPath">The path to save the array of images to.</param>
+        /// <param name="timeout">How long the program should wait for a response (Optional)</param>
         /// <returns></returns>
-        public async Task DownloadGalleryAsync(string prompt, string folderPath)
+        public async Task DownloadGalleryAsync(string prompt, string folderPath, long timeout = DefaultWaitDuration)
         {
             if(prompt == null)
             {
                 throw new DallEInvalidPrompt();
             }
 
-            var gallery = await Download(prompt);
+            var gallery = await Download(prompt,timeout);
 
             // In the case where our path doesn't exist, create it.
             if(!Directory.Exists(folderPath))
@@ -124,14 +126,14 @@ namespace DallE.Net
         /// <param name="path">The pat to save the image to.</param>
         /// <exception cref="DallEOutOfBounds"></exception>
         /// <exception cref="DallEOutOfBounds"></exception>
-        public async Task DownloadImageSpecificAsync(string prompt, string path)
+        public async Task DownloadImageSpecificAsync(string prompt, string path, long timeout = DefaultWaitDuration)
         {
             if (prompt == null)
             {
                 throw new DallEInvalidPrompt();
             }
 
-            var gallery = await Download(prompt);
+            var gallery = await Download(prompt, timeout);
 
             var strippedImage = $"{gallery["images"][_galleryIndex]}";
             await DataUrlToImageAsync(strippedImage, path);

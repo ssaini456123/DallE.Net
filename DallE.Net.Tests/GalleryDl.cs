@@ -10,8 +10,13 @@ namespace DallE.Net.Tests
             Console.WriteLine("Give me a prompt to generate:");
             string prompt = Console.ReadLine();
 
+            Console.WriteLine("Provide a wait time: ");
+            int waitTime = int.Parse(Console.ReadLine());
+            
             Console.WriteLine("Where would you like to save these images?: ");
             string loc = Console.ReadLine();
+
+
             bool exists = Directory.Exists(loc);
 
             while(!exists)
@@ -27,7 +32,7 @@ namespace DallE.Net.Tests
             Console.ForegroundColor = ConsoleColor.White;
             try
             {
-                await dalle.DownloadGalleryAsync(prompt, loc);
+                await dalle.DownloadGalleryAsync(prompt, loc, waitTime);
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Image successfully saved to: {loc}!");
